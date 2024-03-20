@@ -15,6 +15,7 @@ def extract_text_from_position(pdf_path, needle):
             extracted_text += text.strip() + " "  # Add a space after each extracted text
     return extracted_text.strip()
 
+
 def split_pdf(pdf_path):
     pdf = PdfReader(pdf_path)
     num_pages = len(pdf.pages)
@@ -41,8 +42,6 @@ def split_pdf(pdf_path):
             cursor.execute("INSERT INTO pdf_pages (pdf_id, page_number, file_path) VALUES (%s, %s, %s)", (pdf_id, page_num + 1, page_file_name))
 
         connections['default'].commit()
-
-
 
 
 def upload_pdf(request):
