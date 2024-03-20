@@ -15,7 +15,6 @@ def extract_text_from_position(pdf_path, needle):
             extracted_text += text.strip() + " "  # Add a space after each extracted text
     return extracted_text.strip()
 
-
 def split_pdf(pdf_path):
     pdf = PdfReader(pdf_path)
     num_pages = len(pdf.pages)
@@ -31,9 +30,21 @@ def split_pdf(pdf_path):
             output = PdfWriter()
             output.add_page(pdf.pages[page_num])
             
-            # Define the filename for each page using the search text
-            page_file_name = f"{needle}_page_{page_num + 1}.pdf"
-
+            # Find the line containing "FILM" on the page
+            found_text = None
+            for line in pdf.pages[page_num].extract_text().split("\n"):
+                if needle in line:
+                    found_text = line
+                    break
+            
+            if found_text:
+                # Use the first line containing "FILM" as the title
+                page_title = found_text.strip()
+            else:
+                page_title = f"page_{page_num + 1}"  # Use a default title if "FILM" is not found
+            
+            page_file_name = f"{page_title}_page_{page_num + 1}.pdf"  # Define the filename using the found text
+            
             # Write the page to a new PDF file
             with open(os.path.join(os.path.dirname(pdf_path), page_file_name), 'wb') as output_pdf:
                 output.write(output_pdf)
@@ -42,6 +53,9 @@ def split_pdf(pdf_path):
             cursor.execute("INSERT INTO pdf_pages (pdf_id, page_number, file_path) VALUES (%s, %s, %s)", (pdf_id, page_num + 1, page_file_name))
 
         connections['default'].commit()
+
+
+
 
 
 def upload_pdf(request):
