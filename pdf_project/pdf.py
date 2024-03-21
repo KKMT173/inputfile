@@ -17,7 +17,7 @@ def extract_text_and_positions(pdf_path):
     return text_and_positions
 
 # เรียกใช้ฟังก์ชันเพื่อดึงข้อความและตำแหน่งจากไฟล์ PDF
-pdf_path = "C:\\Users\\user\\Desktop\\inputfile\\pdf_files\\page_1.pdf"  # แทนที่ด้วยตำแหน่งและชื่อไฟล์ PDF ของคุณ
+pdf_path = "C:\\Users\\mintorn-ta\\Desktop\\TT57FILMGUIDEFRAMEbondingmachine.pdf"  # แทนที่ด้วยตำแหน่งและชื่อไฟล์ PDF ของคุณ
 text_and_positions = extract_text_and_positions(pdf_path)
 
 # พิมพ์ข้อความและตำแหน่งที่ได้
