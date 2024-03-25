@@ -8,8 +8,9 @@
     <h2>Upload PDF File</h2>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        <input type="file" name="pdf_file"> <!-- แก้ไขส่วนนี้เป็น input type file ให้ตรงกับชื่อของฟิลด์ที่คุณใช้รับไฟล์ PDF -->
-        <button type="submit">Upload</button>
+        <input type="file" name="zip_file" accept=".zip">
+        <button type="submit">Upload ZIP</button>
     </form>
+    
 </body>
 </html>
